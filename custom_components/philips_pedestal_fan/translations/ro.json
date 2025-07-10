@@ -1,5 +1,5 @@
 {
-  "title": "Philips AirPurifier",
+  "title": "Philips Pedestal Fan",
   "config": {
     "abort": {
       "already_configured": "Dispozitiv deja configurat",
@@ -8,7 +8,7 @@
     },
     "step": {
       "user": {
-        "title": "Dispozitiv nou Philips AirPurifier",
+        "title": "Dispozitiv nou Philips Pedestal Fan",
         "data": {
           "host": "Numele de gazdă sau adresa IP a dispozitivului"
         }

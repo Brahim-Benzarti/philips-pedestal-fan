@@ -1,5 +1,5 @@
 {
-  "title": "Philips AirPurifier",
+  "title": "Philips Pedestal Fan",
   "config": {
     "abort": {
       "already_configured": "Zariadenie je už konfigurované",
@@ -8,7 +8,7 @@
     },
     "step": {
       "user": {
-        "title": "Nový Philips AirPurifier",
+        "title": "Nový Philips Pedestal Fan",
         "data": {
           "host": "Meno hostiteľa alebo adresa IP"
         }

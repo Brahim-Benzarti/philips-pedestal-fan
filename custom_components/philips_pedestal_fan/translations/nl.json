@@ -1,5 +1,5 @@
 {
-  "title": "Philips Luchtreiniger",
+  "title": "Philips Pedestal Ventilator",
   "config": {
     "abort": {
       "already_configured": "Apparaat is al geconfigureerd",
@@ -8,7 +8,7 @@
     },
     "step": {
       "user": {
-        "title": "Nieuwe Philips luchtreiniger",
+        "title": "Nieuwe Philips Pedestal Ventilator",
         "data": {
           "host": "Hostnaam of IP-adres van apparaat"
         }

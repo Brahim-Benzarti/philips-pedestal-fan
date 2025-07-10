@@ -1,5 +1,5 @@
 {
-  "title": "Philips AirPurifier",
+  "title": "Philips Pedestal Fan",
   "config": {
     "abort": {
       "already_configured": "Device already configured",
@@ -8,7 +8,7 @@
     },
     "step": {
       "user": {
-        "title": "New Philips AirPurifier",
+        "title": "New Philips Pedestal Fan",
         "data": {
           "host": "Device hostname or IP address"
         }

@@ -1,5 +1,5 @@
 {
-  "title": "Philips Пречиствател на въздух",
+  "title": "Philips Постамент Вентилатор",
   "config": {
     "abort": {
       "already_configured": "Устройството вече е конфигурирано",
@@ -8,7 +8,7 @@
     },
     "step": {
       "user": {
-        "title": "Нов Philips Пречиствател на въздух",
+        "title": "Нов Philips Постамент Вентилатор",
         "data": {
           "host": "Име на устройството (device hostname) или IP адрес"
         }

@@ -1,7 +1,7 @@
 {
   "domain": "philips_pedestal_fan",
   "name": "Philips Pedestal Fan",
-  "codeowners": ["@YOUR_GITHUB_USERNAME"],
+  "codeowners": ["@Brahim-Benzarti"],
   "config_flow": true,
   "dependencies": ["frontend", "http"],
   "dhcp": [
@@ -24,10 +24,10 @@
       "registered_devices": true
     }
   ],
-  "documentation": "https://github.com/YOUR_GITHUB_USERNAME/philips-pedestal-fan",
+  "documentation": "https://github.com/Brahim-Benzarti/philips-pedestal-fan",
   "integration_type": "device",
   "iot_class": "local_push",
-  "issue_tracker": "https://github.com/YOUR_GITHUB_USERNAME/philips-pedestal-fan/issues",
+  "issue_tracker": "https://github.com/Brahim-Benzarti/philips-pedestal-fan/issues",
   "requirements": ["aioairctrl==0.2.5", "getmac==0.9.4"],
   "version": "0.25.0"
 }

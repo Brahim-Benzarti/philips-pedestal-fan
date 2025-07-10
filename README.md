@@ -77,9 +77,9 @@ This integration stands on the shoulders of giants. Huge thanks to:
 
 *Adapted for pedestal fans by* **@Brahim-Benzarti**
 
-## ☕ Support the Original Work
+## ☕ Support This Project
 
-If this integration helps you, consider supporting the original authors:
+If this pedestal fan integration helps you, consider supporting the development:
 
 <div align="center">
 

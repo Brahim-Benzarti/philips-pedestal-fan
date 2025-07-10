@@ -83,7 +83,7 @@ If this integration helps you, consider supporting the original authors:
 
 <div align="center">
 
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/kongo09)
+[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://buymeacoffee.com/brahimbenzarti)
 
 </div>
 

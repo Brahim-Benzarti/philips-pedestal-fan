@@ -263,6 +263,24 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "angle_preset": {
+        "name": "Angle Preset",
+        "state": {
+          "center": "Center (0°)",
+          "left_quarter": "Left Quarter (90°)",
+          "left_half": "Left Half (135°)",
+          "right_quarter": "Right Quarter (270°)",
+          "right_half": "Right Half (225°)",
+          "full_left": "Full Left (180°)",
+          "wide_oscillation": "Wide Oscillation (180°)",
+          "narrow_oscillation": "Narrow Oscillation (90°)"
+        }
+      }
+    },
+    "button": {
+      "jingle_bells": {
+        "name": "🎵 Jingle Bells"
       }
     },
     "number": {

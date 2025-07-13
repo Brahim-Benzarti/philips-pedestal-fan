@@ -60,10 +60,28 @@ The integration automatically discovers compatible devices on your network.
 ## 🎯 What You Get
 
 - **Fan Control** - Speed, oscillation, sleep mode
+- **Precise Angle Control** - Position your fan at specific angles (0°, 90°, 180°, etc.)
+- **Angle Presets** - Quick select common positions: Center, Left/Right Quarter, Wide/Narrow oscillation
+- **🎵 Fun Features** - Play songs using beep patterns! (Jingle Bells included)
 - **Air Purifier** - Filter monitoring, air quality sensors
 - **Environmental Sensors** - Temperature, humidity, PM2.5, allergens
 - **Smart Features** - Child lock, timers, light controls
 - **Status Monitoring** - Filter life, connectivity, error states
+
+### 🌪️ Advanced Angle Control
+
+For supported models (AMF765, AMF870, CX series), you get:
+- **Angle Preset Selector** - Choose from predefined positions like "Center", "Left Quarter", "Wide Oscillation"
+- **Precise Angle Number** - Set exact angles from 0° to 350° in 5° steps
+- **Smart Positioning** - Stop oscillation at specific angles instead of continuous movement
+
+### 🎵 Fun Music Features
+
+Make your fan musical! For devices with beep functionality:
+- **🎵 Jingle Bells Button** - One-click to play the classic holiday tune
+- **Song Service** - `philips_pedestal_fan.play_song` service for automations
+- **Beep Melodies** - Uses the fan's built-in beep to create recognizable tunes
+- **Expandable** - Easy to add more songs in the future
 
 ## 🏆 Credits & Acknowledgments
 

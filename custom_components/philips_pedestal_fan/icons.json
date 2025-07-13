@@ -230,6 +230,24 @@
           "11h": "mdi:clock-time-eleven",
           "12h": "mdi:clock-time-twelve"
         }
+      },
+      "angle_preset": {
+        "default": "pap:rotate",
+        "state": {
+          "center": "pap:rotate",
+          "left_quarter": "mdi:rotate-left",
+          "left_half": "mdi:rotate-left",
+          "right_quarter": "mdi:rotate-right",
+          "right_half": "mdi:rotate-right",
+          "full_left": "mdi:rotate-left",
+          "wide_oscillation": "pap:oscillate",
+          "narrow_oscillation": "pap:oscillate"
+        }
+      }
+    },
+    "button": {
+      "jingle_bells": {
+        "default": "mdi:music-note"
       }
     },
     "number": {

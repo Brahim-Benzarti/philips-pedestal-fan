@@ -22,6 +22,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.device_registry import format_mac
+import voluptuous as vol
 
 from .config_entry_data import ConfigEntryData
 from .const import (
@@ -35,15 +36,18 @@ from .const import (
     LOADER_PATH,
     LOADER_URL,
     PAP,
+    PhilipsApi,
 )
 from .coordinator import Coordinator
 from .model import DeviceInformation
+from .philips import model_to_class
 
 _LOGGER = logging.getLogger(__name__)
 
 
 PLATFORMS = [
     "binary_sensor",
+    "button",
     "climate",
     "fan",
     "humidifier",
@@ -189,6 +193,79 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = config_entry_data
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+
+    # Register song playing services
+    async def play_song_service(call):
+        """Handle play song service calls."""
+        song_name = call.data.get("song", "jingle_bells")
+        entity_id = call.data.get("entity_id")
+        
+        if entity_id:
+            # Get the specific device
+            for entry_id, entry_data in hass.data[DOMAIN].items():
+                device_id = entry_data.device_information.device_id
+                model = entry_data.device_information.model
+                if f"{model}-{device_id}" in entity_id:
+                    await play_song_on_device(entry_data, song_name)
+                    break
+        else:
+            # Play on all devices that support beep
+            for entry_data in hass.data[DOMAIN].values():
+                await play_song_on_device(entry_data, song_name)
+
+    async def play_song_on_device(config_entry_data: ConfigEntryData, song_name: str):
+        """Play a song on a specific device using beep patterns."""
+        
+        # Check if device supports beep
+        model_class = model_to_class.get(config_entry_data.device_information.model)
+        if not model_class:
+            return
+            
+        available_switches = []
+        for cls in reversed(model_class.__mro__):
+            cls_available_switches = getattr(cls, "AVAILABLE_SWITCHES", [])
+            available_switches.extend(cls_available_switches)
+            
+        if PhilipsApi.NEW2_BEEP not in available_switches:
+            _LOGGER.warning("Device %s does not support beep functionality", 
+                          config_entry_data.device_information.name)
+            return
+            
+        # Get song pattern
+        song_patterns = PhilipsApi.SONG_PATTERNS
+        pattern = song_patterns.get(song_name)
+        
+        if not pattern:
+            _LOGGER.error("Unknown song: %s", song_name)
+            return
+            
+        _LOGGER.info("Playing song '%s' on device %s", song_name, 
+                    config_entry_data.device_information.name)
+        
+        # Play the pattern
+        try:
+            for beep_duration, pause_duration in pattern:
+                # Turn beep on
+                await config_entry_data.client.set_control_value(PhilipsApi.NEW2_BEEP, 1)
+                await asyncio.sleep(beep_duration)
+                
+                # Turn beep off
+                await config_entry_data.client.set_control_value(PhilipsApi.NEW2_BEEP, 0)
+                await asyncio.sleep(pause_duration)
+                
+        except Exception as e:
+            _LOGGER.error("Error playing song %s: %s", song_name, e)
+
+    # Register the service
+    hass.services.async_register(
+        DOMAIN,
+        "play_song",
+        play_song_service,
+        schema=vol.Schema({
+            vol.Optional("entity_id"): cv.entity_id,
+            vol.Optional("song", default="jingle_bells"): cv.string,
+        })
+    )
 
     return True
 

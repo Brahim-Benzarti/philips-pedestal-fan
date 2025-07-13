@@ -247,18 +247,18 @@ class FanAttributes(StrEnum):
     ACTUAL_FAN_SPEED = "actual_fan_speed"
     AIR_QUALITY_INDEX = "air_quality_index"
     AIR_QUALITY = "air_quality"
+    ALLERGEN = "allergen"
+    AUTO = "auto"
+    AUTO_PLUS = "auto_plus"
+    AUTO_QUICKDRY_MODE = "auto_quickdry_mode"
+    QUICKDRY_MODE = "quickdry_mode"
+    BACTERIA = "bacteria"
     CHILD_LOCK = "child_lock"
-    BEEP = "beep"
     DEVICE_ID = "device_id"
     DEVICE_VERSION = "device_version"
     DISPLAY_BACKLIGHT = "display_backlight"
-    AUTO_DISPLAY_BACKLIGHT = "auto_display_backlight"
-    ERROR_CODE = "error_code"
+    ERROR_CODE = "error"
     ERROR = "error"
-    RAW = "raw"
-    TOTAL = "total"
-    TIME_REMAINING = "time_remaining"
-    TYPE = "type"
     FILTER_PRE = "pre_filter"
     FILTER_HEPA = "hepa_filter"
     FILTER_ACTIVE_CARBON = "active_carbon_filter"
@@ -266,7 +266,6 @@ class FanAttributes(StrEnum):
     FILTER_NANOPROTECT = "nanoprotect_filter"
     FILTER_NANOPROTECT_CLEAN = "pre_filter"
     FUNCTION = "function"
-    PURIFICATION = "purification"
     HUMIDITY = "humidity"
     HUMIDIFICATION = "humidification"
     HUMIDIFIER = "humidifier"
@@ -306,6 +305,7 @@ class FanAttributes(StrEnum):
     SWING = "swing"
     TURBO = "turbo"
     OSCILLATION = "oscillation"
+    ANGLE_PRESET = "angle_preset"
     VALUE_LIST = "value_list"
     ON = "on"
     OFF = "off"
@@ -519,43 +519,37 @@ class PhilipsApi:
         2: FanFunction.CIRCULATION,
         3: FanFunction.HEATING,
     }
-    TIMER_MAP = {
-        0: "Off",
-        1: "30min",
-        2: "1h",
-        3: "2h",
-        4: "3h",
-        5: "4h",
-        6: "5h",
-        7: "6h",
-        8: "7h",
-        9: "8h",
-        10: "9h",
-        11: "10h",
-        12: "11h",
-        13: "12h",
+
+    # Angle preset mapping for easy fan positioning
+    ANGLE_PRESET_MAP = {
+        "center": 0,           # Center position (0°)
+        "left_quarter": 90,    # Left quarter turn (90°)
+        "left_half": 135,      # Left half position (135°)
+        "right_quarter": 270,  # Right quarter turn (270°)
+        "right_half": 225,     # Right half position (225°)
+        "full_left": 180,      # Full left (180°)
+        "wide_oscillation": 180,  # Wide oscillillation range (180°)
+        "narrow_oscillation": 90, # Narrow oscillillation range (90°)
+        "custom": 0,           # Custom position (set via number entity)
     }
-    TIMER2_MAP = {
-        0: "Off",
-        2: "1h",
-        3: "2h",
-        4: "3h",
-        5: "4h",
-        6: "5h",
-        7: "6h",
-        8: "7h",
-        9: "8h",
-        10: "9h",
-        11: "10h",
-        12: "11h",
-        13: "12h",
+
+    # Song patterns for beep melodies
+    # Format: (beep_duration, pause_duration) in seconds
+    JINGLE_BELLS_PATTERN = [
+        # "Jin-gle bells, Jin-gle bells, Jin-gle all the way"
+        (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # Jin-gle bells
+        (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # Jin-gle bells  
+        (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (1.2, 0.4),  # Jin-gle all the way
+        # "Oh what fun it is to ride in a one-horse o-pen sleigh"
+        (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # Oh what fun it
+        (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # is to ride
+        (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # in a one-horse
+        (0.3, 0.1), (0.3, 0.1), (1.2, 0.8),  # o-pen sleigh
+    ]
+
+    SONG_PATTERNS = {
+        "jingle_bells": JINGLE_BELLS_PATTERN,
     }
-    # HUMIDITY_TARGET_MAP = {
-    #     40: "40%",
-    #     50: "50%",
-    #     60: "60%",
-    #     70: "max",
-    # }
 
 
 SENSOR_TYPES: dict[str, SensorDescription] = {
@@ -942,25 +936,11 @@ SELECT_TYPES: dict[str, SelectDescription] = {
         CONF_ENTITY_CATEGORY: EntityCategory.CONFIG,
         OPTIONS: PhilipsApi.NEW2_GAS_PREFERRED_INDEX_MAP,
     },
-    PhilipsApi.NEW2_CIRCULATION: {
-        FanAttributes.LABEL: FanAttributes.FUNCTION,
+    # Virtual angle preset selector for easy fan positioning
+    "angle_preset": {
+        FanAttributes.LABEL: FanAttributes.ANGLE_PRESET,
         CONF_ENTITY_CATEGORY: EntityCategory.CONFIG,
-        OPTIONS: PhilipsApi.CIRCULATION_MAP,
-    },
-    PhilipsApi.NEW2_HEATING: {
-        FanAttributes.LABEL: FanAttributes.FUNCTION,
-        CONF_ENTITY_CATEGORY: EntityCategory.CONFIG,
-        OPTIONS: PhilipsApi.HEATING_MAP,
-    },
-    PhilipsApi.NEW2_TIMER: {
-        FanAttributes.LABEL: FanAttributes.TIMER,
-        CONF_ENTITY_CATEGORY: EntityCategory.CONFIG,
-        OPTIONS: PhilipsApi.TIMER_MAP,
-    },
-    PhilipsApi.NEW2_TIMER2: {
-        FanAttributes.LABEL: FanAttributes.TIMER,
-        CONF_ENTITY_CATEGORY: EntityCategory.CONFIG,
-        OPTIONS: PhilipsApi.TIMER2_MAP,
+        OPTIONS: PhilipsApi.ANGLE_PRESET_MAP,
     },
 }
 

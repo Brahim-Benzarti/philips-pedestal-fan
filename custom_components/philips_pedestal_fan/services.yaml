@@ -1,0 +1,64 @@
+set_angle:
+  name: Set Fan Angle
+  description: Set the fan to a specific angle position.
+  target:
+    entity:
+      domain: number
+      integration: philips_pedestal_fan
+  fields:
+    angle:
+      name: Angle
+      description: The angle to set the fan to (0-350 degrees).
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 350
+          step: 5
+          unit_of_measurement: "°"
+
+set_angle_preset:
+  name: Set Angle Preset
+  description: Set the fan to a predefined angle preset.
+  target:
+    entity:
+      domain: select
+      integration: philips_pedestal_fan
+  fields:
+    preset:
+      name: Angle Preset
+      description: The angle preset to set.
+      required: true
+      selector:
+        select:
+          options:
+            - "center"
+            - "left_quarter"
+            - "left_half"
+            - "right_quarter"
+            - "right_half"
+            - "full_left"
+            - "wide_oscillation"
+            - "narrow_oscillation"
+
+play_song:
+  name: Play Song
+  description: Play a fun song using the fan's beep functionality.
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The fan entity to play the song on (optional - if not specified, plays on all compatible fans).
+      required: false
+      selector:
+        entity:
+          domain: fan
+          integration: philips_pedestal_fan
+    song:
+      name: Song
+      description: The song to play.
+      required: false
+      default: "jingle_bells"
+      selector:
+        select:
+          options:
+            - "jingle_bells"

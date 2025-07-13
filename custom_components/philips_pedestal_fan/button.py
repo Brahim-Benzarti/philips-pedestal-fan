@@ -74,12 +74,11 @@ class JingleBellsButton(PhilipsEntity, ButtonEntity):
 
     async def async_press(self) -> None:
         """Handle the button press."""
-        # Call the play_song service
+        # Call the play_song service for this specific device
         await self.hass.services.async_call(
             DOMAIN,
             "play_song",
             {
-                "entity_id": f"fan.{self.config_entry_data.device_information.name.lower().replace(' ', '_')}",
                 "song": "jingle_bells"
             }
         )

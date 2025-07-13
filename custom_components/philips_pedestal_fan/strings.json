@@ -291,5 +291,21 @@
         "name": "Target temperature"
       }
     }
+  },
+  "services": {
+    "play_song": {
+      "name": "Play Song",
+      "description": "Play a fun song using the fan's beep functionality.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "The fan entity to play the song on (optional - if not specified, plays on all compatible fans)."
+        },
+        "song": {
+          "name": "Song",
+          "description": "The song to play."
+        }
+      }
+    }
   }
 }

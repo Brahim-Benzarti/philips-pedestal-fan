@@ -74,14 +74,43 @@ class JingleBellsButton(PhilipsEntity, ButtonEntity):
 
     async def async_press(self) -> None:
         """Handle the button press."""
-        # Call the play_song service for this specific device
-        await self.hass.services.async_call(
-            DOMAIN,
-            "play_song",
-            {
-                "song": "jingle_bells"
-            }
-        )
+        # Try to call the service first, fall back to direct control
+        try:
+            await self.hass.services.async_call(
+                DOMAIN,
+                "play_song",
+                {"song": "jingle_bells"}
+            )
+        except Exception as e:
+            _LOGGER.warning("Service call failed, using direct control: %s", e)
+            # Fallback to direct control
+            await self._play_jingle_bells()
         
         _LOGGER.info("Jingle Bells button pressed on device %s", 
                     self.config_entry_data.device_information.name)
+    
+    async def _play_jingle_bells(self) -> None:
+        """Play Jingle Bells using the device beep functionality."""
+        import asyncio
+        from .const import SONG_PATTERNS
+        
+        pattern = SONG_PATTERNS.get("jingle_bells")
+        if not pattern:
+            _LOGGER.error("Jingle Bells pattern not found")
+            return
+            
+        _LOGGER.info("Playing Jingle Bells on device %s", 
+                    self.config_entry_data.device_information.name)
+        
+        try:
+            for beep_duration, pause_duration in pattern:
+                # Turn beep on
+                await self.config_entry_data.client.set_control_value(PhilipsApi.NEW2_BEEP, 1)
+                await asyncio.sleep(beep_duration)
+                
+                # Turn beep off  
+                await self.config_entry_data.client.set_control_value(PhilipsApi.NEW2_BEEP, 0)
+                await asyncio.sleep(pause_duration)
+                
+        except Exception as e:
+            _LOGGER.error("Error playing Jingle Bells: %s", e)

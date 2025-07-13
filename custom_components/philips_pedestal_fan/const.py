@@ -534,23 +534,25 @@ class PhilipsApi:
         "custom": 0,           # Custom position (set via number entity)
     }
 
-    # Song patterns for beep melodies
-    # Format: (beep_duration, pause_duration) in seconds
-    JINGLE_BELLS_PATTERN = [
-        # "Jin-gle bells, Jin-gle bells, Jin-gle all the way"
-        (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # Jin-gle bells
-        (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # Jin-gle bells  
-        (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (1.2, 0.4),  # Jin-gle all the way
-        # "Oh what fun it is to ride in a one-horse o-pen sleigh"
-        (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # Oh what fun it
-        (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # is to ride
-        (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # in a one-horse
-        (0.3, 0.1), (0.3, 0.1), (1.2, 0.8),  # o-pen sleigh
-    ]
 
-    SONG_PATTERNS = {
-        "jingle_bells": JINGLE_BELLS_PATTERN,
-    }
+# Song patterns for beep functionality (duration in seconds: beep_time, pause_time)
+JINGLE_BELLS_PATTERN = [
+    # Jingle bells, jingle bells, jingle all the way
+    (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # Jin-gle bells
+    (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # jin-gle bells
+    (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # jin-gle all the
+    (1.2, 0.8),  # way
+    
+    # Oh what fun it is to ride in a one-horse open sleigh
+    (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # Oh what fun it
+    (0.3, 0.1), (0.3, 0.1), (0.6, 0.2),  # is to ride
+    (0.3, 0.1), (0.3, 0.1), (0.3, 0.1), (0.3, 0.1),  # in a one-horse
+    (0.3, 0.1), (0.3, 0.1), (1.2, 0.8),  # o-pen sleigh
+]
+
+SONG_PATTERNS = {
+    "jingle_bells": JINGLE_BELLS_PATTERN,
+}
 
 
 SENSOR_TYPES: dict[str, SensorDescription] = {

@@ -22,7 +22,6 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.device_registry import format_mac
-import voluptuous as vol
 
 from .config_entry_data import ConfigEntryData
 from .const import (
@@ -261,9 +260,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         DOMAIN,
         "play_song",
         play_song_service,
-        schema=vol.Schema({
-            vol.Optional("entity_id"): cv.entity_id,
-            vol.Optional("song", default="jingle_bells"): cv.string,
+        schema=cv.make_entity_service_schema({
+            cv.Optional("song", default="jingle_bells"): cv.string,
         })
     )
 

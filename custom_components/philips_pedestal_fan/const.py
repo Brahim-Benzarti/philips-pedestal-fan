@@ -320,7 +320,6 @@ class FanAttributes(StrEnum):
     MIN_TEMPERATURE = "min_temperature"
     MAX_TEMPERATURE = "max_temperature"
     STANDBY_SENSORS = "standby_sensors"
-    AUTO_PLUS = "auto_plus"
     WATER_TANK = "water_tank"
     AUTO_QUICKDRY_MODE = "auto_quickdry_mode"
     QUICKDRY_MODE = "quickdry_mode"

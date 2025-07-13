@@ -249,8 +249,10 @@ class FanAttributes(StrEnum):
     AIR_QUALITY = "air_quality"
     ALLERGEN = "allergen"
     AUTO = "auto"
+    AUTO_PLUS = "auto_plus"
     AUTO_QUICKDRY_MODE = "auto_quickdry_mode"
     BACTERIA = "bacteria"
+    BEEP = "beep"
     CHILD_LOCK = "child_lock"
     DEVICE_ID = "device_id"
     DEVICE_VERSION = "device_version"
@@ -610,7 +612,7 @@ SENSOR_TYPES: dict[str, SensorDescription] = {
     },
     PhilipsApi.NEW2_REMAINING_TIME: {
         ATTR_DEVICE_CLASS: SensorDeviceClass.DURATION,
-        FanAttributes.LABEL: FanAttributes.TIME_REMAINING,
+        FanAttributes.LABEL: FanAttributes.TIMER,
         ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
         FanAttributes.UNIT: UnitOfTime.MINUTES,
     },

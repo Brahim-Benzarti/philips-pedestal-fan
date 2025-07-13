@@ -37,7 +37,6 @@ from .const import (
     LOADER_URL,
     PAP,
     PhilipsApi,
-    SONG_PATTERNS,
 )
 from .coordinator import Coordinator
 from .model import DeviceInformation
@@ -224,6 +223,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 return
                 
             # Get song pattern
+            from .const import SONG_PATTERNS
             pattern = SONG_PATTERNS.get(song_name)
             
             if not pattern:

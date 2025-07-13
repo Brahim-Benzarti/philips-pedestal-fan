@@ -313,6 +313,7 @@ class FanAttributes(StrEnum):
     MAX = "max"
     STEP = "step"
     TIMER = "timer"
+    TIME_REMAINING = "time_remaining"
     TEMPERATURE = "temperature"
     TARGET_TEMP = "target_temperature"
     MIN_TEMPERATURE = "min_temperature"
@@ -612,7 +613,7 @@ SENSOR_TYPES: dict[str, SensorDescription] = {
     },
     PhilipsApi.NEW2_REMAINING_TIME: {
         ATTR_DEVICE_CLASS: SensorDeviceClass.DURATION,
-        FanAttributes.LABEL: FanAttributes.TIMER,
+        FanAttributes.LABEL: FanAttributes.TIME_REMAINING,
         ATTR_STATE_CLASS: SensorStateClass.MEASUREMENT,
         FanAttributes.UNIT: UnitOfTime.MINUTES,
     },
